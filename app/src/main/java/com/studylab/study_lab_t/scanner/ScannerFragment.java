@@ -12,17 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.studylab.study_lab_t.R;
 
 public class ScannerFragment extends Fragment {
-    ScannerViewModel scannerViewModel;
+    private ScannerViewModel scannerViewModel;
+    private Button bt_scanner;
+    private Button bt_home;
 
     public ScannerFragment() {
         // Required empty public constructor
@@ -49,6 +54,9 @@ public class ScannerFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        bt_scanner = view.findViewById(R.id.scanner_bt_scanner);
+        bt_home = view.findViewById(R.id.scanner_bt_home);
+
         ActivityResultLauncher<Intent> launchScanner = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -60,6 +68,7 @@ public class ScannerFragment extends Fragment {
                             String format = intentResult.getFormatName();
                             String[] num = content.split("_");
                             String userId = num[1];
+                            Log.d("DEBUG", "onActivityResult: "+userId);
                             scannerViewModel.setCurrUser(userId);
                         }
                     }
@@ -69,5 +78,19 @@ public class ScannerFragment extends Fragment {
         intentIntegrator.setOrientationLocked(true);
         Intent i = intentIntegrator.createScanIntent();
         launchScanner.launch(i);
+
+        bt_scanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchScanner.launch(i);
+            }
+        });
+
+        bt_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(ScannerFragment.this).navigate(R.id.action_scannerFragment_to_homeFragment);
+            }
+        });
     }
 }
