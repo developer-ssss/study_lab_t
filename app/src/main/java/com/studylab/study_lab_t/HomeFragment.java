@@ -46,5 +46,12 @@ public class HomeFragment extends Fragment {
                 NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_scannerFragment);
             }
         });
+
+        bt_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_homeFragment_to_questionFragment);
+            }
+        });
     }
 }

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_scannerFragment"
             app:destination="@id/scannerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_questionFragment"
+            app:destination="@id/questionFragment" />
     </fragment>
     <fragment
         android:id="@+id/scannerFragment"
@@ -21,6 +24,15 @@
         tools:layout="@layout/fragment_scanner" >
         <action
             android:id="@+id/action_scannerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionFragment"
+        android:name="com.studylab.study_lab_t.QuestionFragment"
+        android:label="fragment_question"
+        tools:layout="@layout/fragment_question" >
+        <action
+            android:id="@+id/action_questionFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 
