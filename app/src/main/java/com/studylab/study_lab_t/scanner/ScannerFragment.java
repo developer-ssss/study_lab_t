@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -28,6 +29,8 @@ public class ScannerFragment extends Fragment {
     private ScannerViewModel scannerViewModel;
     private Button bt_scanner;
     private Button bt_home;
+
+    private String userId;
 
     public ScannerFragment() {
         // Required empty public constructor
@@ -56,6 +59,16 @@ public class ScannerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         bt_scanner = view.findViewById(R.id.scanner_bt_scanner);
         bt_home = view.findViewById(R.id.scanner_bt_home);
+        scannerViewModel.setUserMap();
+
+        scannerViewModel.loadUser().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isLoaded) {
+                if(isLoaded){
+                    scannerViewModel.changeCheckInState();
+                }
+            }
+        });
 
         ActivityResultLauncher<Intent> launchScanner = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -67,8 +80,7 @@ public class ScannerFragment extends Fragment {
                             String content = intentResult.getContents();
                             String format = intentResult.getFormatName();
                             String[] num = content.split("_");
-                            String userId = num[1];
-                            Log.d("DEBUG", "onActivityResult: "+userId);
+                            userId = num[2];
                             scannerViewModel.setCurrUser(userId);
                         }
                     }
