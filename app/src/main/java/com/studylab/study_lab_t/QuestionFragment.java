@@ -131,6 +131,7 @@ public class QuestionFragment extends Fragment {
         bt_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                questionViewModel.saveAnswer(et_answer.getText().toString());
                 questionViewModel.addProblemImage(changeBitmap);
                 NavHostFragment.findNavController(QuestionFragment.this).navigate(R.id.action_questionFragment_to_homeFragment);
             }

@@ -17,6 +17,8 @@ import com.google.firebase.storage.UploadTask;
 import com.studylab.study_lab_t.model.Result;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FirebaseDataSource implements DataSource{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -64,5 +66,15 @@ public class FirebaseDataSource implements DataSource{
                 Log.d("DEBUG", "DataSource: storeImage() failed!");
             }
         });
+    }
+
+    @Override
+    public void saveAnswer(String answer, DataSourceCallback<Result> callback) {
+        Map<String, String> answerMap = new HashMap<>();
+        answerMap.put("answer", answer);
+        db.collection("answer")
+                .document("answer")
+                .set(answerMap);
+        callback.onComplete(new Result.Success<String>("Success"));
     }
 }

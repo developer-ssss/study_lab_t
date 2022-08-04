@@ -32,4 +32,14 @@ public class QuestionViewModel extends ViewModel {
            }
         });
     }
+
+    public void saveAnswer(String answer){
+        userRepository.saveAnswer(answer,result->{
+           if(result instanceof Result.Success){
+
+           }else{
+
+           }
+        });
+    }
 }

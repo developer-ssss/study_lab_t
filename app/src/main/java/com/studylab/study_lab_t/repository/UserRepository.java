@@ -5,6 +5,7 @@ import android.net.Uri;
 
 import com.studylab.study_lab_t.App;
 import com.studylab.study_lab_t.FileService;
+import com.studylab.study_lab_t.datasource.DataSourceCallback;
 import com.studylab.study_lab_t.model.Result;
 import com.studylab.study_lab_t.model.User;
 import com.studylab.study_lab_t.datasource.DataSource;
@@ -47,6 +48,11 @@ public class UserRepository {
             }
         });
     }
+
+    public void saveAnswer(final String answer, final DataSourceCallback<Result> callback){
+        dataSource.saveAnswer(answer, callback);
+    }
+
     public void setExecutor(Executor exec) {
         this.executor = exec;
     }
