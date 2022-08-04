@@ -1,4 +1,4 @@
-package com.studylab.study_lab_t;
+package com.studylab.study_lab_t.question;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +27,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.studylab.study_lab_t.App;
+import com.studylab.study_lab_t.FileService;
+import com.studylab.study_lab_t.R;
 import com.studylab.study_lab_t.databinding.FragmentQuestionBinding;
 
 import java.io.File;

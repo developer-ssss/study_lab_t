@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/questionFragment"
-        android:name="com.studylab.study_lab_t.QuestionFragment"
+        android:name="com.studylab.study_lab_t.question.QuestionFragment"
         android:label="fragment_question"
         tools:layout="@layout/fragment_question" >
         <action
