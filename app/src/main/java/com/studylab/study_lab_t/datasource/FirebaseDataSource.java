@@ -44,8 +44,8 @@ public class FirebaseDataSource implements DataSource{
                             List<User> toReturn = new ArrayList<>();
                             List<DocumentSnapshot> snaps = value.getDocuments();
                             for(DocumentSnapshot snap : snaps){
-                                User toAdd = new User(snap.getString("displayName"),snap.getString("id"),snap.getString("password"),snap.getString("phoneNum"),snap.getString("checkIn"));
-                                String toStringAdd = snap.getString("id");
+                                User toAdd = new User(snap.getString("name"),snap.getString("userId"),snap.getString("password"),snap.getString("phoneNumber"),snap.getString("checkIn"));
+                                String toStringAdd = snap.getString("userId");
                                 toReturnMap.put(toStringAdd,toAdd);
                             }
                             callback.onUpdate(new Result.Success<Map<String, User>>(toReturnMap));
