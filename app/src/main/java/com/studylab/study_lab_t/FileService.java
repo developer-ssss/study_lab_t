@@ -159,9 +159,6 @@ public class FileService extends Service {
         executor = e;
     }
 
-
-
-
     public interface FileServiceCallback<T> {
         void onComplete(T result);
     }

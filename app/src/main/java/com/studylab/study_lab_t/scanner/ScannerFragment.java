@@ -15,11 +15,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -27,13 +25,9 @@ import com.studylab.study_lab_t.R;
 
 public class ScannerFragment extends Fragment {
     private ScannerViewModel scannerViewModel;
-    private Button bt_scanner;
-    private Button bt_home;
-
-    private String userId;
+    private String id;
 
     public ScannerFragment() {
-        // Required empty public constructor
     }
 
     public static ScannerFragment newInstance() {
@@ -51,17 +45,14 @@ public class ScannerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_scanner, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        bt_scanner = view.findViewById(R.id.scanner_bt_scanner);
-        bt_home = view.findViewById(R.id.scanner_bt_home);
         scannerViewModel.setUserMap();
 
-        scannerViewModel.loadUser().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        scannerViewModel.isUserLoaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isLoaded) {
                 if(isLoaded){
@@ -80,8 +71,8 @@ public class ScannerFragment extends Fragment {
                             String content = intentResult.getContents();
                             String format = intentResult.getFormatName();
                             String[] num = content.split("_");
-                            userId = num[2];
-                            scannerViewModel.setCurrUser(userId);
+                            id = num[2];
+                            scannerViewModel.setCurrUser(id);
                         }
                     }
                 });
@@ -90,19 +81,6 @@ public class ScannerFragment extends Fragment {
         intentIntegrator.setOrientationLocked(true);
         Intent i = intentIntegrator.createScanIntent();
         launchScanner.launch(i);
-
-        bt_scanner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchScanner.launch(i);
-            }
-        });
-
-        bt_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(ScannerFragment.this).navigate(R.id.action_scannerFragment_to_homeFragment);
-            }
-        });
+        NavHostFragment.findNavController(ScannerFragment.this).navigate(R.id.action_scannerFragment_to_homeFragment);
     }
 }
