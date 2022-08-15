@@ -57,9 +57,9 @@ public class FirebaseDataSource implements DataSource{
     }
 
     @Override
-    public void changeCheckInState(String userId, User changeUserCheckInState, DataSourceCallback<Result> callback) {
+    public void changeCheckInState(String id, User changeUserCheckInState, DataSourceCallback<Result> callback) {
         db.collection("users")
-                .document(userId)
+                .document(id)
                 .set(changeUserCheckInState);
         callback.onComplete(new Result.Success<String>("Success"));
     }
@@ -67,6 +67,7 @@ public class FirebaseDataSource implements DataSource{
     public void downloadFile(String downloadPath, File localFile, DataSourceCallback<Result<File>> callback) {
         Log.d("DEBUG:DataSource", "downloadFile: " + downloadPath);
         StorageReference ref = firebaseStorage.getReference().child(downloadPath);
+
         ref.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
@@ -82,9 +83,10 @@ public class FirebaseDataSource implements DataSource{
     public void uploadFile(File toUpload, String destination, DataSourceCallback<Result<Uri>> callback) {
         Log.d("DEBUG:DataSource", "uploadFile: " + toUpload.getName() + " to " + destination);
         Uri localFile = Uri.fromFile(toUpload);
+
         StorageReference storageReference = firebaseStorage.getReference().child(destination);
-        UploadTask uploadTask = storageReference.putFile(localFile);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+        storageReference.putFile(localFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
