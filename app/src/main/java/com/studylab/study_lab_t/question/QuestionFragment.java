@@ -45,7 +45,6 @@ public class QuestionFragment extends Fragment {
     private Button bt_add;
 
     private Uri selectedImage;
-    private FileService fileService;
     private File imageFile;
     private Bitmap changeBitmap;
 

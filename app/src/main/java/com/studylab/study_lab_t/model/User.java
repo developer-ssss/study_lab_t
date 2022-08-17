@@ -3,7 +3,7 @@ package com.studylab.study_lab_t.model;
 
 public class User {
     private String name;
-    private String userId;
+    private String id;
     private String password;
     private String phoneNumber;
     private String checkIn;
@@ -12,7 +12,7 @@ public class User {
 
     public User(String name, String userId, String password, String phoneNumber, String checkIn) {
         this.name = name;
-        this.userId = userId;
+        this.id = userId;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.checkIn = checkIn;
@@ -26,12 +26,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPassword() {

@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class ScannerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         scannerViewModel = new ViewModelProvider(requireActivity()).get(ScannerViewModel.class);
+        scannerViewModel.setUserMap();
     }
 
     @Override
@@ -50,13 +52,14 @@ public class ScannerFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        scannerViewModel.setUserMap();
+
 
         scannerViewModel.isUserLoaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isLoaded) {
-                if(isLoaded){
+                if (isLoaded) {
                     scannerViewModel.changeCheckInState();
+                    NavHostFragment.findNavController(ScannerFragment.this).navigate(R.id.action_scannerFragment_to_homeFragment);
                 }
             }
         });
@@ -81,6 +84,6 @@ public class ScannerFragment extends Fragment {
         intentIntegrator.setOrientationLocked(true);
         Intent i = intentIntegrator.createScanIntent();
         launchScanner.launch(i);
-        NavHostFragment.findNavController(ScannerFragment.this).navigate(R.id.action_scannerFragment_to_homeFragment);
+
     }
 }

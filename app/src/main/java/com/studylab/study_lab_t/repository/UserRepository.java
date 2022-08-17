@@ -3,6 +3,9 @@ package com.studylab.study_lab_t.repository;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.studylab.study_lab_t.App;
 import com.studylab.study_lab_t.FileService;
 import com.studylab.study_lab_t.datasource.DataSourceCallback;
@@ -36,8 +39,9 @@ public class UserRepository {
     }
 
     public User getUser(String userId) {
-        if (userMap.containsKey(userId))
+        if (userMap.containsKey(userId)){
             return userMap.get(userId);
+        }
         return null;
     }
 

@@ -41,11 +41,10 @@ public class FirebaseDataSource implements DataSource{
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if(error==null){
                             Map<String, User> toReturnMap = new HashMap<>();
-                            List<User> toReturn = new ArrayList<>();
                             List<DocumentSnapshot> snaps = value.getDocuments();
                             for(DocumentSnapshot snap : snaps){
-                                User toAdd = new User(snap.getString("name"),snap.getString("userId"),snap.getString("password"),snap.getString("phoneNumber"),snap.getString("checkIn"));
-                                String toStringAdd = snap.getString("userId");
+                                User toAdd = new User(snap.getString("name"),snap.getString("id"),snap.getString("password"),snap.getString("phoneNumber"),snap.getString("checkIn"));
+                                String toStringAdd = snap.getString("id");
                                 toReturnMap.put(toStringAdd,toAdd);
                             }
                             callback.onUpdate(new Result.Success<Map<String, User>>(toReturnMap));

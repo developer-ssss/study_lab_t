@@ -25,12 +25,14 @@ public class ScannerViewModel extends ViewModel {
         currUser = userRepository.getUser(userId);
         if (currUser != null) {
             userLoaded.postValue(true);
+        }else{
+            userLoaded.postValue(false);
         }
     }
 
     public void changeCheckInState() {
-        toReturnUser = new User(currUser.getName(), currUser.getUserId(), currUser.getPassword(), currUser.getPhoneNumber(), "true");
-        userRepository.changeCheckInState(currUser.getUserId(), toReturnUser, result -> {
+        toReturnUser = new User(currUser.getName(), currUser.getId(), currUser.getPassword(), currUser.getPhoneNumber(), "true");
+        userRepository.changeCheckInState(currUser.getId(), toReturnUser, result -> {
             if (result instanceof Result.Success) {
                 Log.d("DEBUG", "changeCheckInState: success to change checkIn state");
             } else {
