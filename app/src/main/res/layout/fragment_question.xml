@@ -1,81 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".question.QuestionFragment" >
+    android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/question_bt_takePicture"
-        android:layout_width="104dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:text="사진찍기"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".question.QuestionFragment">
 
-    <Button
-        android:id="@+id/question_bt_importPicture"
-        android:layout_width="184dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="8dp"
-        android:text="갤러리에서 가져오기"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_bt_takePicture" />
+        <Button
+            android:id="@+id/question_bt_takePicture"
+            android:layout_width="104dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="사진찍기"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/question_iv_problemImage"
-        android:layout_width="385dp"
-        android:layout_height="373dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_bt_importPicture"
-        tools:src="@tools:sample/avatars" />
+        <Button
+            android:id="@+id/question_bt_importPicture"
+            android:layout_width="184dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="8dp"
+            android:text="갤러리에서 가져오기"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question_bt_takePicture" />
 
-    <TextView
-        android:id="@+id/question_tv_answerLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="answer"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        <ImageView
+            android:id="@+id/question_iv_problemImage"
+            android:layout_width="385dp"
+            android:layout_height="373dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question_bt_importPicture"
+            tools:src="@tools:sample/avatars" />
 
-    <EditText
-        android:id="@+id/question_et_answer"
-        android:layout_width="57dp"
-        android:layout_height="69dp"
-        android:ems="2"
-        android:inputType="number"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.714"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+        <TextView
+            android:id="@+id/question_tv_answerLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="answer"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.35"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        <EditText
+            android:id="@+id/question_et_answer"
+            android:layout_width="57dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="8dp"
+            android:ems="2"
+            android:inputType="number"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/question_tv_answerLabel"
+            app:layout_constraintStart_toEndOf="@+id/question_tv_answerLabel"
+            app:layout_constraintTop_toTopOf="@+id/question_tv_answerLabel" />
 
-    <Button
-        android:id="@+id/question_bt_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question_et_answer" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/question_bt_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question_et_answer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
