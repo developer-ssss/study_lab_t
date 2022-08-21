@@ -16,10 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,11 +63,11 @@ public class QuestionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding= FragmentQuestionBinding.inflate(inflater, container, false);
-        bt_takePicture= binding.questionBtTakePicture;
+        binding = FragmentQuestionBinding.inflate(inflater, container, false);
+        bt_takePicture = binding.questionBtTakePicture;
         bt_importPicture = binding.questionBtImportPicture;
-        iv_problemImage= binding.questionIvProblemImage;
-        et_answer= binding.questionEtAnswer;
+        iv_problemImage = binding.questionIvProblemImage;
+        et_answer = binding.questionEtAnswer;
         bt_add = binding.questionBtAdd;
         return binding.getRoot();
     }
@@ -73,17 +75,18 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         ActivityResultLauncher<Intent> launchCamera = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        if(result.getResultCode() == Activity.RESULT_OK){
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
                             iv_problemImage.setImageBitmap(bitmap);
                             questionViewModel.saveBitmapToMediaStore(bitmap);
                             iv_problemImage.invalidate();
-                            changeBitmap = ((BitmapDrawable)iv_problemImage.getDrawable()).getBitmap();
+                            changeBitmap = ((BitmapDrawable) iv_problemImage.getDrawable()).getBitmap();
                         }
                     }
                 }
@@ -91,20 +94,18 @@ public class QuestionFragment extends Fragment {
 
         ActivityResultLauncher<Intent> launchGallery = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>()
-                {
+                new ActivityResultCallback<ActivityResult>() {
                     @Override
-                    public void onActivityResult(ActivityResult result)
-                    {
-                        if(result.getResultCode() == Activity.RESULT_OK)
-                        {
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
                             selectedImage = result.getData().getData();
                             iv_problemImage.setImageURI(selectedImage);
                             iv_problemImage.invalidate();
-                            changeBitmap=((BitmapDrawable)iv_problemImage.getDrawable()).getBitmap();
+                            changeBitmap = ((BitmapDrawable) iv_problemImage.getDrawable()).getBitmap();
                         }
                     }
                 });
+
 
         bt_takePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,8 +113,7 @@ public class QuestionFragment extends Fragment {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 FileService fileService = App.getFileService();
                 imageFile = fileService.createFile("", "temp.jpg");
-                if(imageFile != null)
-                {
+                if (imageFile != null) {
                     Uri photoURI = FileProvider.getUriForFile(requireActivity(), App.getFileProvider(), imageFile);
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 }

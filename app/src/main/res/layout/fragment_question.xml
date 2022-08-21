@@ -13,21 +13,21 @@
 
         <Button
             android:id="@+id/question_bt_takePicture"
-            android:layout_width="104dp"
-            android:layout_height="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
-            android:text="사진찍기"
+            android:text="Take Photo"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/question_bt_importPicture"
-            android:layout_width="184dp"
-            android:layout_height="55dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="갤러리에서 가져오기"
+            android:text="Import Photo"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question_bt_takePicture" />
