@@ -80,10 +80,9 @@ public class ScannerFragment extends Fragment {
                     }
                 });
         IntentIntegrator intentIntegrator = IntentIntegrator.forSupportFragment(ScannerFragment.this);
-        intentIntegrator.setPrompt("Scan a barcode or QR code");
+        intentIntegrator.setPrompt("바코드나 QR 코드를 스캔하세요.");
         intentIntegrator.setOrientationLocked(true);
         Intent i = intentIntegrator.createScanIntent();
         launchScanner.launch(i);
-
     }
 }

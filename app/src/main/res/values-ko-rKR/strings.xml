@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">study lab teacher</string>
+    <string name="tv_scanner">스캐너</string>
+    <string name="tv_question">문제 등록</string>
+    <string name="tv_takePhoto">사진 찍기</string>
+    <string name="tv_importPhoto">갤러리에서 사진 가져오기</string>
+    <string name="tv_answer">정답</string>
+    <string name="tv_add">사진 등록</string>
+</resources>

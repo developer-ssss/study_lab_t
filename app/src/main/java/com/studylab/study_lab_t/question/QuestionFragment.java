@@ -51,7 +51,6 @@ public class QuestionFragment extends Fragment {
     private Bitmap changeBitmap;
 
     public QuestionFragment() {
-        // Required empty public constructor
     }
 
     @Override

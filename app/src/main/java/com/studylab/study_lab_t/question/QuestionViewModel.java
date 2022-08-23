@@ -3,6 +3,7 @@ package com.studylab.study_lab_t.question;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -33,21 +34,17 @@ public class QuestionViewModel extends ViewModel {
 
     public void addProblemImage(Bitmap problemImage){
         userRepository.addProblem(problemImage, result->{
-           if(result instanceof Result.Success){
-
-           } else{
-
-           }
+            if (!(result instanceof Result.Success)) {
+                Log.d("DEBUG", "addProblemImage: network error");
+            }
         });
     }
 
     public void saveAnswer(String answer){
         userRepository.saveAnswer(answer,result->{
-           if(result instanceof Result.Success){
-
-           }else{
-
-           }
+            if (!(result instanceof Result.Success)) {
+                Log.d("DEBUG", "saveAnswer: network error");
+            }
         });
     }
 
